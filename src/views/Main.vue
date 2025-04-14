@@ -14,7 +14,9 @@ import NVDA from "../assets/NVDA.png";
 import NFLX from "../assets/NFLX.png";
 import APPL from "../assets/AAPL.png";
 import ADBE from "../assets/ADBE.png";
-import { callback } from "chart.js/helpers";
+import AddStock from "./Dialogs/AddStock.vue";
+import { useTheme } from "vuetify";
+import { computed } from "vue";
 
 ChartJS.register(
   Title,
@@ -24,6 +26,10 @@ ChartJS.register(
   CategoryScale,
   LinearScale
 );
+
+const theme = useTheme();
+
+const isDark = computed(() => theme.current.value.dark);
 
 const data = {
   labels: [
@@ -135,15 +141,28 @@ const recent_bought_stock = [
 </script>
 <template>
   <v-container>
+    <AddStock></AddStock>
     <v-row>
       <v-col cols="6">
         <h2>Hej, <b> witam ponownie</b> 🥱</h2>
       </v-col>
       <v-col cols="6" class="text-right">
-        <v-btn class="mx-2" color="black" rounded="lg" prepend-icon="mdi-plus">
+        <v-btn
+          id="activator-add-stock-target"
+          class="mx-2"
+          color="black"
+          rounded="lg"
+          prepend-icon="mdi-plus"
+        >
           Dodaj pozycję
         </v-btn>
-        <v-btn class="mx-2" color="black" rounded="lg" disabled>
+        <v-btn
+          class="mx-2 opacity-50"
+          color="black"
+          rounded="lg"
+          disabled
+          prepend-icon="mdi-file-excel"
+        >
           Eksportuj
         </v-btn>
       </v-col>
@@ -151,8 +170,7 @@ const recent_bought_stock = [
     <v-row>
       <v-col class="flex-grow-0">
         <v-btn-toggle
-          class="bg-grey-lighten-4"
-          density="compact"
+          :class="isDark ? 'bg-grey-darken-4' : 'bg-grey-lighten-4'"
           selected-class="bg-white opacity-100"
           rounded="lg"
           variant="text"
