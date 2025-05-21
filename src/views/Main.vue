@@ -17,6 +17,7 @@ import ADBE from "../assets/ADBE.png";
 import AddStock from "./Dialogs/AddStock.vue";
 import { useTheme } from "vuetify";
 import { computed } from "vue";
+import ChatButton from "@/components/ChatButton.vue";
 
 ChartJS.register(
   Title,
@@ -278,6 +279,7 @@ const recent_bought_stock = [
       </v-col>
     </v-row>
   </v-container>
+  <ChatButton />
 </template>
 <style>
 .v-btn--active {
