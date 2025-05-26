@@ -1,11 +1,23 @@
-import { createMemoryHistory, createRouter } from "vue-router";
+import {
+  createMemoryHistory,
+  createRouter,
+  createWebHashHistory,
+} from "vue-router";
+import Main from "@/views/Main.vue";
+import Wallet from "@/views/Wallet.vue";
 
 export const router = createRouter({
-  history: createMemoryHistory(),
+  history: createWebHashHistory(),
   routes: [
     {
       path: "/",
-      component: () => import("@/views/Main.vue"),
+      component: Main,
+      name: "main",
+    },
+    {
+      path: "/wallet",
+      component: Wallet,
+      name: "wallet",
     },
   ],
 });
